@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "test-jenkins"
+    }
+  },
+  "defaultProject": "test-jenkins",
+  "cli": {
+    "analytics": false
+  }
 }

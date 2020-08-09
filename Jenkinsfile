@@ -15,7 +15,7 @@ pipeline {
         stage('Unit tests') {
             steps { 
               withEnv (['CHROME_BIN=/usr/bin/google-chrome']) {
-                sh 'npm run-script test:debugging'
+                sh 'npm run-script test:no-watch'
               } 
             }
         }
