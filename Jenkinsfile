@@ -6,8 +6,17 @@ pipeline {
     stage('Install') {
       steps { sh 'npm install' }
     }
+    stage('LightHouse') {
+      sh 'npx lighthouse-ci https://www.example.com --jsonReport --report=.'
+      lighthouseReport('./report.json')
+    }
 
     stage('Test') {
+      agent {
+        docker { 
+          image 'browserless/chrome'
+        }
+      }
       parallel {
         stage('Static code analysis') {
             steps { sh 'npm run-script lint' }
