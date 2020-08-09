@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --preserve-symlinks",
+    "test:no-watch": "npm run test -- --watch=false",
+    "test:debugging": "npm run test -- --browsers ChromeDebugging",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
