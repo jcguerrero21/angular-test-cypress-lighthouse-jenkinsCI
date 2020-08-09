@@ -13,7 +13,11 @@ pipeline {
             steps { sh 'npm run-script lint' }
         }
         stage('Unit tests') {
-            steps { sh 'npm run-script test' }
+            steps { 
+              withEnv (['CHROME_BIN=/usr/bin/google-chrome']) {
+                sh 'npm run-script test'
+              } 
+            }
         }
       }
     }
