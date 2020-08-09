@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    docker { image 'node:latest' }
+  }
   stages {
     stage('Install') {
       steps { sh 'npm install' }
@@ -12,19 +14,17 @@ pipeline {
     }
 
     stage('Test') {
-      agent {
-        docker { 
-          image 'browserless/chrome'
-        }
-      }
       parallel {
         stage('Static code analysis') {
-            steps { sh 'npm run-script lint' }
+          steps { sh 'npm run-script lint' }
         }
         stage('Unit tests') {
-            steps { 
-              sh 'npm run-script test'
+          agent {
+            docker { 
+              image 'browserless/chrome'
             }
+          }
+          steps { sh 'npm run-script test' }
         }
       }
     }
