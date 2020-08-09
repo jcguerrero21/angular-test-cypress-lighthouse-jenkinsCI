@@ -8,7 +8,7 @@ pipeline {
     }
     stage('LightHouse') {
       steps {
-        sh 'npx lighthouse-ci https://www.example.com --jsonReport --report=.'
+        sh 'npx lighthouse-ci https://www.google.com --jsonReport --report=.'
         lighthouseReport('./report.json')
       }
     }
