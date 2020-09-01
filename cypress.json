@@ -1,0 +1,51 @@
+{ 
+    "$schema": "https://on.cypress.io/cypress.schema.json",
+    "chromeWebSecurity": false,
+    "fixturesFolder": "tests/e2e/fixtures",
+    "integrationFolder": "tests/e2e/integration",
+    "pluginsFile": "tests/e2e/plugins/index.js",
+    "supportFile": "tests/e2e/support/index.js",
+    "screenshotsFolder": "output/e2e/screenshots",
+    "videosFolder": "output/e2es/videos",
+    "baseUrl": "http://localhost:4200",
+    "reporter": "mochawesome",
+    "reporterOptions": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": true,
+        "json": true
+    },
+    "ignoreTestFiles": [
+        "**/__snapshots__/*",
+        "**/__image_snapshots__/*"
+    ],
+    "env": {
+        "cypress-plugin-snapshots": {
+            "autoCleanUp": false,            
+            "autopassNewSnapshots": true,    
+            "diffLines": 3,                  
+            "excludeFields": [],             
+            "ignoreExtraArrayItems": false,  
+            "ignoreExtraFields": false,      
+            "normalizeJson": true,           
+            "prettier": true,                
+            "imageConfig": {
+                "createDiffImage": true,       
+                "resizeDevicePixelRatio": true,
+                "threshold": 0.01,             
+                "thresholdType": "percent"     
+            },
+            "screenshotConfig": {            
+                "blackout": [],
+                "capture": "fullPage",
+                "clip": null,
+                "disableTimersAndAnimations": true,
+                "log": false,
+                "scale": false,
+                "timeout": 30000
+            },
+            "updateSnapshots": true,
+            "backgroundBlend": "difference"  
+        }
+    }
+}

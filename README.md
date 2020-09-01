@@ -1,27 +1,63 @@
-# TestJenkins
+# MyCypressApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
 
-## Development server
+When we run cypress command we obtain the screenshots in the folder outputs
+and the report and the folder cypress/results. We can changed this configuration in the file cypress.json
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The project have a pipeline for dockerized jenkins. Almost the project generate a report of lighthouse
 
-## Code scaffolding
+## Configuration
+We need to install cypress in our computer. If we using docker and jenkins, remember install google-chrome into the dockerized jenkins, also, we need obtain the image cypress and the image browslesschrome for the correct work.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+¡¡Remember add the label docker in the global configuration of jenkins dockerized!!
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```node 
+npm run test or ng test
+```
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+ you can choose two types of reports:
 
-## Further help
+- Report 1 with xml files:
+    - Add into cypress.json:
+    ```json
+        "reporter": "cypress-multi-reporters",
+        "reporterOptions": {
+            "configFile": "reporter-config.json"
+        },
+        ...
+    ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ - Report 2 with json and html files:
+    - Add into cypress.json:
+    ```json
+        "reporter": "mochawesome",
+        "reporterOptions": {
+            "reportDir": "cypress/results",
+            "overwrite": false,
+            "html": true,
+            "json": true
+        },
+        ...
+    ```
+
+## Execute commands:
+- Report 1: 
+    ```node 
+    - npm run prereport
+    - npm run cy:run:chrome:report or npm rucy:run:firefox:report or npm run cy:run:edge:report
+    ```
+Report 2:
+```node 
+npm run cy:run:mochawesome
+```
+    
+Lighthouse:
+```node 
+npm run lighthouse
+```
+

@@ -1,9 +1,8 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
-const puppeteer = require('puppeteer');
-process.env.CHROME_BIN = puppeteer.executablePath();
+const process = require('process');
 process.env.NO_PROXY = 'localhost, 0.0.0.0/4201, 0.0.0.0/9876';
-process.env.no_proxy = 'localhost, 0.0.0.0/4201, 0.0.0.0/9876';
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 module.exports = function (config) {
   config.set({
@@ -19,14 +18,8 @@ module.exports = function (config) {
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-          base: 'ChromeHeadless',
-          flags: ['--no-sandbox']
-      }
-    },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, './coverage/test-jenkins'),
+      dir: require('path').join(__dirname, './coverage/my-cypress-app'),
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     },
@@ -35,7 +28,13 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadlessNoSandbox'],
+    browsers: ['HeadlessChrome'],
+    customLaunchers:{
+      HeadlessChrome:{
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     singleRun: false,
     restartOnFileChange: true
   });
